@@ -1,114 +1,170 @@
-Two-Stage CDFSL for Plant Disease Recognition
+# Two-Stage PEFT for Cross-Domain Few-Shot Plant Disease Recognition
 
-Official implementation of a two-stage parameter-efficient framework for cross-domain few-shot plant disease recognition.
+Official implementation of:
 
-# Paper
+**A Two-Stage Parameter-Efficient Framework for Cross-Domain Few-Shot Plant Disease Recognition**
 
-A Two-Stage Parameter-Efficient Framework for Cross-Domain Few-Shot Plant Disease Recognition
+*Saeed Khankalantary and Mohammad Reza Eskandari*  
+*Computers and Electronics in Agriculture, 2026*
 
-Saeed Khankalantary, Mohammad Reza Eskandari
-Computers and Electronics in Agriculture, 2026
+[Paper DOI: 10.1016/j.compag.2026.111691](https://doi.org/10.1016/j.compag.2026.111691)
 
-DOI: 10.1016/j.compag.2026.111691
+---
 
-# Overview
+## Overview
 
-Recognizing plant diseases in real-world environments is challenging because available labeled data can be limited and visual conditions can differ substantially across domains.
+Plant disease recognition in real-world field images is challenging because the available labeled data can be limited and the visual distribution can differ substantially between training and deployment environments.
 
-This repository contains the implementation of a two-stage parameter-efficient adaptation framework for cross-domain few-shot plant disease recognition. The framework first adapts a pretrained visual model to relevant visual domains and subsequently performs lightweight task-specific adaptation using only a small number of labeled examples from the target task.
+This repository contains the implementation of a **two-stage parameter-efficient framework for cross-domain few-shot learning (CDFSL)** for plant disease recognition.
 
-The approach is designed to reduce the number of trainable parameters while retaining useful representations from the pretrained backbone.
+The framework separates adaptation into two stages:
 
-# Framework
+1. **Offline domain adaptation**  
+   A pretrained visual model is adapted using domain-relevant datasets to improve its representation for the target visual environment.
 
-The proposed approach consists of two main stages:
+2. **Online few-shot adaptation**  
+   Lightweight task-specific adaptation is performed using only a small number of labeled examples from the target task.
 
-## Stage 1 — Offline Domain Adaptation
+The approach aims to make adaptation more data-efficient and parameter-efficient while retaining useful representations from the pretrained visual backbone.
 
-A pretrained visual backbone is adapted using domain-relevant datasets to obtain representations that are better suited to the visual characteristics of the target problem.
+## Method
 
-## Stage 2 — Online Few-Shot Adaptation
+The overall pipeline can be summarized as:
 
-Lightweight task-specific adaptation is performed using the limited labeled examples available for the target classification task.
+```text
+Pretrained Vision Transformer
+          |
+          v
+Offline Domain Adaptation
+(Domain-relevant datasets)
+          |
+          v
+Adapted Visual Representation
+          |
+          v
+Online Few-Shot Adaptation
+(Limited target-domain labels)
+          |
+          v
+Target Disease Classification
+```
 
-This separation allows most of the adaptation to be performed before deployment while keeping the online adaptation stage parameter-efficient.
+The implementation uses **Vision Transformers** together with **parameter-efficient adaptation** rather than relying only on full-model fine-tuning.
 
-# Datasets
+## Datasets
 
-The experiments use multiple plant-disease and domain-relevant datasets, including:
+The experiments use plant-disease and domain-relevant visual datasets including:
 
-PlantDoc
-PlantSeg
-PlantWild
+- [PlantDoc](https://github.com/pratikkayal/PlantDoc-Dataset)
+- PlantSeg
+- PlantWild
 
-Please refer to the paper for the complete experimental setup, dataset splits, and preprocessing details.
+The datasets are **not distributed with this repository**. Please obtain each dataset from its original source and follow the corresponding dataset license and terms of use.
 
-Dataset files are not included in this repository. Please obtain each dataset from its original source and follow the corresponding dataset license and terms of use.
+Dataset directory structure and preprocessing requirements are described in the relevant dataset/configuration files.
 
-# Results
+## Results
 
 The proposed framework achieves:
 
-Setting	Accuracy
-5-way 1-shot	76.13%
-5-way 5-shot	89.00%
+| Setting | Accuracy |
+| --- | ---: |
+| 5-way 1-shot | **76.13%** |
+| 5-way 5-shot | **89.00%** |
 
-See the paper for complete results, comparisons, ablations, and experimental details.
+Please refer to the paper for the complete experimental results, comparisons, ablation studies, and evaluation protocol.
 
-# Installation
+## Requirements
+
+The implementation is based on:
+
+- Python
+- PyTorch
+- CUDA
+- `torchvision`
+- `timm`
+- `scikit-learn`
+- Pillow
+
+A complete dependency list is provided in [`requirements.txt`](requirements.txt).
+
+## Installation
 
 Clone the repository:
 
-git clone https://github.com/<USERNAME>/two-stage-peft-cdfsl-plant-disease.git
+```bash
+git clone https://github.com/rezaes97/two-stage-peft-cdfsl-plant-disease.git
 cd two-stage-peft-cdfsl-plant-disease
+```
 
-Create the required Python environment and install the dependencies:
+Create a Python environment and install the dependencies:
 
+```bash
 pip install -r requirements.txt
+```
 
-The code is intended to run with PyTorch and CUDA-enabled hardware.
+A CUDA-enabled GPU is recommended for training.
 
-# Data Preparation
+## Data Preparation
 
-Download the required datasets from their official sources and organize them according to the expected directory structure.
+1. Download the required datasets from their official sources.
+2. Organize them according to the directory structure expected by the repository.
+3. Update the corresponding dataset paths/configuration files.
+4. Generate or provide the required training/evaluation splits before running the experiments.
 
-Update the dataset paths in the corresponding configuration files or command-line arguments before running the experiments.
+> **Important:** Do not commit the original datasets, large checkpoints, or generated experiment outputs to the repository.
 
-# Training
-Stage 1
+## Running the Code
 
-Run the offline/domain-adaptation stage using:
+The repository is organized around the two stages of the proposed framework.
 
-* Under Construction
+### Stage 1 - Offline Domain Adaptation
 
-Run the few-shot adaptation/evaluation stage using:
+Use the Stage 1 training scripts/configuration to adapt the pretrained visual representation using the domain-relevant training data.
 
-* Under construction
+```bash
+# Not implemented yet
+```
 
-The exact commands and configuration options are provided in the repository scripts.
+### Stage 2 - Online Few-Shot Adaptation
 
-# Repository Structure
+After Stage 1, use the Stage 2 implementation to perform lightweight adaptation and evaluate the target few-shot tasks.
+
+```bash
+# Not implemented yet
+```
+
+See the source files and configuration options in the repository for the exact experiment commands.
+
+## Repository Structure
+
+The exact structure may evolve as the implementation is cleaned up, but the main components are organized around:
+
+```text
 two-stage-peft-cdfsl-plant-disease/
 ├── datasets/
 ├── models/
-├── scripts/
 ├── configs/
+├── scripts/
 ├── utils/
 ├── train/
 ├── test/
 ├── requirements.txt
-├── LICENSE
-└── README.md
-# Reproducibility
+├── README.md
+└── LICENSE
+```
 
-Experiments reported in the paper depend on the dataset versions, preprocessing, training configuration, and random seeds used during experimentation.
+## Reproducibility
 
-Additional implementation details and configuration files are included in this repository where applicable.
+The reported results depend on the dataset versions, preprocessing, train/test splits, random seeds, model configuration, and training settings used in the paper.
 
-# Citation
+For faithful reproduction, use the configurations and splits provided with the repository and consult the paper for the full experimental protocol.
 
-If you use this code or find this work useful, please cite:
+## Citation
 
+If you use this code or build upon this work, please cite:
+
+```bibtex
 @article{khankalantary2026twostage,
   title   = {A Two-Stage Parameter-Efficient Framework for Cross-Domain Few-Shot Plant Disease Recognition},
   author  = {Khankalantary, Saeed and Eskandari, Mohammad Reza},
@@ -116,8 +172,10 @@ If you use this code or find this work useful, please cite:
   year    = {2026},
   doi     = {10.1016/j.compag.2026.111691}
 }
-# License
+```
 
-This repository is released under the MIT License. See LICENSE.
+## License
+
+This repository is released under the **MIT License**. See [`LICENSE`](LICENSE).
 
 Third-party datasets, pretrained models, and external code remain subject to their respective licenses and terms of use.
