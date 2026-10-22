@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+outputs/
+output/
+checkpoints/
+datasets/
+*.pth
+*.pth.tar
+*.pt
+*.log
