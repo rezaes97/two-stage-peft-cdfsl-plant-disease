@@ -160,8 +160,6 @@ datasets/
 
 The testing code expects the dataset and split layout of the selected experiment; do not assume that a differently organized third-party download can be used without preparing it first.
 
-> **Important:** Do not commit the original datasets, large checkpoints, or generated experiment outputs to the repository. These paths are local and should not be hard-coded into source files.
-
 ## Running the Code
 
 The repository contains a unified Python entry point and PowerShell launchers for the saved PlantDoc one-target workflow. Run the commands from the repository root. All example paths are relative to that directory; replace folder and checkpoint names to match your local data.
