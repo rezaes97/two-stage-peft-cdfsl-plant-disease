@@ -1,8 +1,8 @@
-# Two-Stage PEFT for Cross-Domain Few-Shot Plant Disease Recognition
+# Dual-Stage Parameter-Efficient Tuning for In-Field Plant Disease Few-Shot Classification
 
 Official implementation of:
 
-**A Two-Stage Parameter-Efficient Framework for Cross-Domain Few-Shot Plant Disease Recognition**
+**Dual-stage parameter-efficient tuning for in-field plant disease few-shot classification**
 
 *Saeed Khankalantary and Mohammad Reza Eskandari*  
 *Computers and Electronics in Agriculture, 2026*
@@ -253,7 +253,7 @@ If you use this code or build upon this work, please cite:
 
 ```bibtex
 @article{khankalantary2026twostage,
-  title   = {A Two-Stage Parameter-Efficient Framework for Cross-Domain Few-Shot Plant Disease Recognition},
+  title   = {Dual-stage parameter-efficient tuning for in-field plant disease few-shot classification},
   author  = {Khankalantary, Saeed and Eskandari, Mohammad Reza},
   journal = {Computers and Electronics in Agriculture},
   year    = {2026},
